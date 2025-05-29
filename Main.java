@@ -1,22 +1,69 @@
+
+import java.util.Scanner;
+
 public class Main {
-    //main
-//Hola puedes creaR un programa en java que cumpla con este diagrama UML,
-        GU_Cuenta
-        float saldo;
-        int numeroDepositos =0;
-        int numeroRetiros =0;
-        float tasaAnual;
-GU_Cuenta(float saldo,float tasaAnual)
-depositar(float cantidad):void
-        retirar(float cantidad):void
+        public static void main(String[] args) {
+                Scanner scanner = new Scanner(System.in);
+                GU_CuentaAhorros cuenta = null;
 
-GU_CuentaAhorros
+                while (true) {
+                        System.out.println("\n--- Menú ---");
+                        System.out.println("1. Cuenta de ahorros");
+                        System.out.println("2. Depositar");
+                        System.out.println("3. Retirar");
+                        System.out.println("4. Mostrar saldo");
+                        System.out.println("5. Mostrar estado de la cuenta");
+                        System.out.println("6. Salir");
+                        System.out.print("Seleccione una opción: ");
+                        int opcion = scanner.nextInt();
 
-                activa boolean
-        GU_CuentaAhorros(float saldo, float tasa)
-                depositar(float cantidad): void
-        retirar(float cantidad):void
-
-        Y finalmente imprime un menu con todo esto en el main
-
+                        switch (opcion) {
+                                case 1:
+                                        System.out.print("Ingrese saldo inicial: ");
+                                        float saldoInicial = scanner.nextFloat();
+                                        System.out.print("Ingrese tasa anual: ");
+                                        float tasa = scanner.nextFloat();
+                                        cuenta = new GU_CuentaAhorros(saldoInicial, tasa);
+                                        break;
+                                case 2:
+                                        if (cuenta != null) {
+                                                System.out.print("Ingrese cantidad a depositar: ");
+                                                float deposito = scanner.nextFloat();
+                                                cuenta.depositar(deposito);
+                                        } else {
+                                                System.out.println("Primero debe crear una cuenta.");
+                                        }
+                                        break;
+                                case 3:
+                                        if (cuenta != null) {
+                                                System.out.print("Ingrese cantidad a retirar: ");
+                                                float retiro = scanner.nextFloat();
+                                                cuenta.retirar(retiro);
+                                        } else {
+                                                System.out.println("Primero debe crear una cuenta.");
+                                        }
+                                        break;
+                                case 4:
+                                        if (cuenta != null) {
+                                                cuenta.mostrarSaldo();
+                                        } else {
+                                                System.out.println("Primero debe crear una cuenta.");
+                                        }
+                                        break;
+                                case 5:
+                                        if (cuenta != null) {
+                                                cuenta.mostrarEstado();
+                                        } else {
+                                                System.out.println("Primero debe crear una cuenta.");
+                                        }
+                                        break;
+                                case 6:
+                                        System.out.println("Saliendo...");
+                                        scanner.close();
+                                        return;
+                                default:
+                                        System.out.println("Opción inválida.");
+                        }
+                }
+        }
 }
